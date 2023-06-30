@@ -1,8 +1,10 @@
-const User = require("../model/User");
+
+const UserService = require("../services/UserService");
 
 class UserController {
-    constructor(users) {
+    constructor(users, configService) {
         this.users = users;
+        this.userService = new UserService(configService);
     }
 
     registerUser(name, username, password) {
@@ -10,15 +12,7 @@ class UserController {
     }
 
     loginUser(username, password) {
-        // Perform login logic here
-        // Use the users data to retrieve user data, validate credentials, etc.
-        const user = this.userService.getUserByUsername(username);
-
-        if (user && user.getPassword() === password) {
-            return user;
-        }
-
-        return null;
+        return this.userService.loginUser(username, password);
     }
 }
 

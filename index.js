@@ -1,6 +1,11 @@
 const express = require('express');
 const User = require('./model/User');
 const UserController = require('./controllers/userController');
+
+const ConfigService = require('./services/configService');
+const UserService = require('./services/UserService');
+const Configuration = require('./model/Configuration');
+
 const app = express()
 const port = 3000
 app.use(express.json());
@@ -11,15 +16,19 @@ app.use(express.json());
 const users = [];
 
 // Create an instance of the userModel and userController
-// const userModel = new User();
-const userController = new UserController(users);
+
+const config = new Configuration(); // Initialize the configuration object
+config.setEncryptType(2);
+
+const configService = new ConfigService(config);
+const userController = new UserController(users, configService);
+// const userService = new UserService(configService);
 
 // Endpoint for user registration
 app.post('/register', (req, res) => {
     const { nombre, usuario, password } = req.query;
     const user = userController.registerUser(nombre, usuario, password);
-    console.log(usuario + "  " + password)
-    res.send({ usuario, password, message: 'Registration successful' });
+    res.send({ usuario: user.getUsername(), password, config, message: 'Registration successful' });
 });
 
 // Endpoint for login

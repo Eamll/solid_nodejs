@@ -36,6 +36,15 @@ class UserService {
     }
 
     registerUser(name, username, password) {
+        // Validate inputs
+        this.validateRegisterInputs(name, username, password);
+
+        // Check if user already exists
+        const existingUser = this.getUserByUsername(username);
+        if (existingUser) {
+            throw new Error("El usuario ya existe");
+        }
+
         const encryptedPassword = this.encryptService.encrypt(password);
         const user = new User(name, username, encryptedPassword);
         this.users.push(user);
@@ -44,6 +53,18 @@ class UserService {
 
     getUserByUsername(username) {
         return this.users.find((u) => u.getUsername() === username);
+    }
+
+    validateRegisterInputs(name, username, password) {
+        if (!name || name.trim() === "") {
+            throw new Error("El nombre no puede ser nulo o vacio");
+        }
+        if (!username || username.trim() === "") {
+            throw new Error("El usuario no puede ser nulo o vacio");
+        }
+        if (!password || password.trim() === "") {
+            throw new Error("El password no puede ser nulo o vacio");
+        }
     }
 }
 

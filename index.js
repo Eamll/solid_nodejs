@@ -37,7 +37,7 @@ app.post('/login', (req, res) => {
     const loggedInUser = userController.loginUser(usuario, password);
 
     if (loggedInUser) {
-        res.send({ usuario: loggedInUser.getUsername(), password: loggedInUser.getPassword(), message: 'Login successful' });
+        res.send({ usuario: loggedInUser.getUsername(), password, message: 'Login successful' });
     } else {
         res.status(401).send('Invalid credentials');
     }

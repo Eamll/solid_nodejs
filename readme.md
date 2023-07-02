@@ -4,14 +4,17 @@
     -   Un endpoint para el servicio de Login
    
         http://localhost:3000/login?usuario=xaa&password=ABCcd
+
         Params: usuario, password
     -   Un segundo endpoint para el registro de clientes
  
 	    http://localhost:3000/register?nombre=a&usuario=xaac&password=ABCcd
+
 	    Params: nombre, usuario, password
     -   Un tercer endpoint que permita el cambio de métodos de encriptación y loggers en tiempo de ejecución.
  
 		http://localhost:3000/configuration?encryptType=2&logType=url
+        
 		Params: encryptType, logType
 # Repositorio
 	Link: https://github.com/Eamll/solid_nodejs

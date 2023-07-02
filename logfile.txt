@@ -1,0 +1,10 @@
+Registered new user abccc
+Registered new user xaa
+Successful login for user xaa
+Failed login attempt for user xaa
+Configuration updated
+Registered new user xaa
+Successful login for user xaa
+Registered new user xaa
+Configuration changed to 2file
+Configuration changed to encryptType : 2, logType: file
